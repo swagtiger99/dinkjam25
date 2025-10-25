@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://ceio2dhexqfns"]
+[gd_scene load_steps=22 format=3 uid="uid://ceio2dhexqfns"]
 
-[ext_resource type="Texture2D" uid="uid://cugn7vs2as4ox" path="res://assets/icon.svg" id="1_2jmuu"]
+[ext_resource type="Texture2D" uid="uid://byp4pehrom7c5" path="res://assets/icon.svg" id="1_2jmuu"]
 [ext_resource type="Script" uid="uid://c6fm8k0v324u2" path="res://scripts/player_character.gd" id="1_qn7b7"]
 [ext_resource type="Script" uid="uid://b2md37cmxc0sa" path="res://scripts/revolver.gd" id="3_d3uoy"]
+[ext_resource type="Script" uid="uid://b8g0ho1owo1w0" path="res://scripts/player_camera_2d.gd" id="4_gujqm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nspu6"]
 atlas = ExtResource("1_2jmuu")
@@ -117,7 +118,13 @@ size = Vector2(32, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qn7b7"]
 radius = 32.0156
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gujqm"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vujh"]
+bg_color = Color(0.739789, 1.93726e-06, 9.62615e-07, 1)
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_qn7b7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -137,3 +144,34 @@ script = ExtResource("3_d3uoy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_qn7b7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+script = ExtResource("4_gujqm")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="HPBar" type="ProgressBar" parent="UI/CanvasLayer"]
+offset_left = 13.0
+offset_top = 14.0
+offset_right = 389.0
+offset_bottom = 56.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gujqm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5vujh")
+show_percentage = false
+
+[node name="Ammo_Counter" type="Label" parent="UI/CanvasLayer"]
+offset_left = 984.0
+offset_top = 487.0
+offset_right = 1124.0
+offset_bottom = 624.0
+theme_override_font_sizes/font_size = 100
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

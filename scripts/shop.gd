@@ -61,7 +61,10 @@ func _on_search_button_pressed():
 		for i in children:
 			total = total + 1
 			if str(i.name).to_lower() != str(search).to_lower():
-				i.visible = false
+				if i is Label:
+					pass
+				else:
+					i.visible = false
 				count = count + 1
 			else:
 				i.visible = true
@@ -81,4 +84,25 @@ func set_sales():
 				var Sale = snapped(randnum, 0.01)
 				
 				j.text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]" + str(Sale) +"% off !!!"
-	
+
+
+func _on_buy_medkit_pressed():
+	var player = get_player()
+	print(player)
+	if player is playerCharacter:
+		player.Medkits = player.Medkits + 1
+
+func get_player():
+	var playerfound = false
+	var root_children = get_tree().root.get_children()
+	for i in root_children:
+		if i is playerCharacter:
+			return i
+			playerfound = true
+		var root_children_children = i.get_children() 
+		for j in root_children_children:
+			if j is playerCharacter:
+				return j
+				playerfound = true
+		if playerfound == false:
+			return "Error: Not found player"

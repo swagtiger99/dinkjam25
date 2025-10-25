@@ -65,6 +65,77 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Consumables" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Consumables"
+horizontal_alignment = 1
+
+[node name="Medkit" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture = ExtResource("2_cimqq")
+
+[node name="MedkitPicture" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_yltc6")
+
+[node name="Description" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[color=black][font_size=10]Oh my! You must grab these top of the line medkits while they're on sale! They save lives all the time, every purchase is an injury avoided absolutely and definitely!"
+scroll_active = false
+
+[node name="Buy_Medkit" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -178.0
+offset_top = -92.0
+offset_right = -3.0
+offset_bottom = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "BUY NOW!!!"
+
+[node name="Sale_Amount" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 174.0
+offset_right = 101.0
+offset_bottom = 200.0
+bbcode_enabled = true
+text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]96.38% off !!!"
+scroll_active = false
+
+[node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Medkit"
+
+[node name="Weapons" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Weapons"
+horizontal_alignment = 1
+
 [node name="ErrorMessage" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 200)
@@ -266,3 +337,4 @@ offset_bottom = 23.0
 text = "Shotgun"
 
 [connection signal="pressed" from="CanvasLayer/Title/SearchButton" to="." method="_on_search_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/Medkit/Buy_Medkit" to="." method="_on_buy_medkit_pressed"]

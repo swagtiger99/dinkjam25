@@ -6,7 +6,6 @@ const rotation_speed = 500.0
 
 func _physics_process(delta):
 	pivot_node.look_at(get_global_mouse_position())
-	print(pivot_node.rotation)
 	var revolver_rotation = pivot_node.rotation
 	
 	if pivot_node.rotation_degrees > 360:

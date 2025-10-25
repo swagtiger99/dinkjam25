@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dav5v2n4sb0"]
 
-[ext_resource type="Texture2D" uid="uid://cugn7vs2as4ox" path="res://assets/icon.svg" id="1_mkf8s"]
+[ext_resource type="Texture2D" uid="uid://byp4pehrom7c5" path="res://assets/icon.svg" id="1_mkf8s"]
 [ext_resource type="Script" uid="uid://bsm1njvkaqn0v" path="res://scenes/bullet.gd" id="1_y25gk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y25gk"]
@@ -35,3 +35,5 @@ sprite_frames = SubResource("SpriteFrames_eoqba")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qncy5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
