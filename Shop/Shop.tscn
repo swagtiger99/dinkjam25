@@ -33,6 +33,7 @@ offset_left = 65.0
 offset_top = -1.345
 offset_right = 307.0
 offset_bottom = 29.655
+placeholder_text = "fidget toys"
 
 [node name="SearchButton" type="Button" parent="CanvasLayer/Title"]
 layout_mode = 0
@@ -65,6 +66,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ErrorMessage" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 texture = ExtResource("2_ssic7")
@@ -97,6 +99,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -180.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_wxi3o")
 
 [node name="Description" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Revolver"]
@@ -154,6 +158,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -180.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_wxi3o")
 
 [node name="Description" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Sniper"]
@@ -211,6 +217,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -180.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_wxi3o")
 
 [node name="Description" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Shotgun"]

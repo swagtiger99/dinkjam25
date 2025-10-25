@@ -5,9 +5,14 @@ extends Control
 @onready var VBox = $CanvasLayer/ScrollContainer/VBoxContainer
 @onready var Error_Message = $CanvasLayer/ScrollContainer/VBoxContainer/ErrorMessage
 
+var Revolver_Sale : float = 90
+var Sniper_Sale : float = 90
+var Shotgun_Sale : float = 90
+
 func _ready():
 	Error_Message.visible = false
 	randomize_searchbar_text()
+	set_sales()
 
 
 
@@ -64,3 +69,16 @@ func _on_search_button_pressed():
 				Error_Message.visible = true
 			else :
 				Error_Message.visible = false
+
+func set_sales():
+	
+	var children = VBox.get_children()
+	for i in children:
+		var childrener = i.get_children()
+		for j in childrener:
+			if str(j.name) == "Sale_Amount":
+				var randnum = randf_range(90.00, 99.99)
+				var Sale = snapped(randnum, 0.01)
+				
+				j.text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]" + str(Sale) +"% off !!!"
+	
