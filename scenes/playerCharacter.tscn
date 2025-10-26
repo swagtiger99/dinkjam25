@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://ceio2dhexqfns"]
+[gd_scene load_steps=26 format=3 uid="uid://ceio2dhexqfns"]
 
 [ext_resource type="Texture2D" uid="uid://byp4pehrom7c5" path="res://assets/icon.svg" id="1_2jmuu"]
 [ext_resource type="Script" uid="uid://c6fm8k0v324u2" path="res://scripts/player_character.gd" id="1_qn7b7"]
+[ext_resource type="Texture2D" uid="uid://dimyuxvmhywcd" path="res://assets/Guns and bullets.png" id="3_5vujh"]
 [ext_resource type="Script" uid="uid://b2md37cmxc0sa" path="res://scripts/revolver.gd" id="3_d3uoy"]
 [ext_resource type="Script" uid="uid://b8g0ho1owo1w0" path="res://scripts/player_camera_2d.gd" id="4_gujqm"]
 
@@ -115,6 +116,33 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbo5l"]
 size = Vector2(32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbjwb"]
+atlas = ExtResource("3_5vujh")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj38n"]
+atlas = ExtResource("3_5vujh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smnp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbjwb")
+}],
+"loop": false,
+"name": &"Revolver",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj38n")
+}],
+"loop": false,
+"name": &"Sniper",
+"speed": 0.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_qn7b7"]
 radius = 32.0156
 
@@ -137,7 +165,11 @@ shape = SubResource("RectangleShape2D_cbo5l")
 
 [node name="GunPivot" type="RayCast2D" parent="."]
 
-[node name="Revolver" type="Sprite2D" parent="GunPivot"]
+[node name="Revolver" type="AnimatedSprite2D" parent="GunPivot"]
+position = Vector2(40, 0)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_smnp3")
+animation = &"Sniper"
 script = ExtResource("3_d3uoy")
 
 [node name="Area2D" type="Area2D" parent="."]

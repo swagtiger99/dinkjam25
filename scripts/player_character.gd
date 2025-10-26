@@ -3,6 +3,7 @@ class_name playerCharacter extends CharacterBody2D
 
 const SPEED = 300.0
 
+var Shop_Scene = preload("res://scenes/Shop.tscn")
 var max_HP = 7
 var HP = 7
 var ammo = 6
@@ -16,6 +17,7 @@ var Medkits = 0
 var base_damage = 1
 var damage_multiplier = 1
 var bullet_speed = 3
+var reload_time : float = 2
 
 var shoot_screen_shake_amount: float = 1
 var damage_screen_shake_amount : float = 10
@@ -23,16 +25,20 @@ var damage_screen_shake_amount : float = 10
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var Walk_Timer = $Timer
 @onready var PlayerCam = $Camera2D
-@onready var RevolverSprite = $GunPivot/Revolver
+@onready var GunSprite = $GunPivot/Revolver
 @onready var Camera = $Camera2D
 @onready var HPBar = $UI/CanvasLayer/HPBar
 @onready var Ammo_Counter = $UI/CanvasLayer/Ammo_Counter
+
+var shopping = false
 
 #debuff list
 var Screen_Shake_Debuff = false
 var bullet_reverse_debuff = false
 
 func _ready():
+	GunSprite.play("Revolver")
+	
 	_remove_debuffs()
 	_apply_debuffs()
 	
@@ -46,18 +52,21 @@ func playerDamaged(damageTaken):
 	screen_shake(damage_screen_shake_amount)
 	
 func shoot():
-	screen_shake(shoot_screen_shake_amount)
 	
-	if ammo != 0:
-		var bullet = bullet_scene.instantiate()
-		get_tree().get_root().add_child(bullet)
+	if ammo != 0 and shopping == false:
+		screen_shake(shoot_screen_shake_amount)
+		var Bullet = bullet_scene.instantiate()
+		var cur_anim = str(GunSprite.animation)
+		print(cur_anim)
+		Bullet._change_sprite(cur_anim)
+		get_tree().get_root().add_child(Bullet)
 		
-		bullet.rotation = get_node("GunPivot").rotation
+		Bullet.rotation = get_node("GunPivot").rotation
 		
-		bullet.position.y = $GunPivot/Revolver.global_position.y
-		bullet.position.x = $GunPivot/Revolver.global_position.x
+		Bullet.position.y = $GunPivot/Revolver.global_position.y
+		Bullet.position.x = $GunPivot/Revolver.global_position.x
 		
-		bullet.speed = bullet_speed
+		Bullet.speed = bullet_speed
 		
 		ammo -= 1
 		reloading = false
@@ -67,7 +76,7 @@ func shoot():
 func reload():
 	reloading = true
 	ammo = 0
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(reload_time).timeout
 	ammo = ammo_max
 	reloading = false
 	 
@@ -101,10 +110,15 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("reload") and ammo !=6:
 		reload()
 	
+	if Input.is_action_just_pressed("Phone") and shopping == false:
+		shopping = true
+		var new_shop = Shop_Scene.instantiate()
+		get_tree().get_root().add_child(new_shop)
+	
 	if HP == 0:
 		get_tree().reload_current_scene()
-
-	move_and_slide()
+	if shopping == false:
+		move_and_slide()
 
 func damage_algorithm():
 	base_damage * damage_multiplier

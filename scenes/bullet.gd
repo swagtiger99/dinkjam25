@@ -1,5 +1,7 @@
 class_name bullet extends Area2D
 
+@onready var sprite = $AnimatedSprite2D
+
 var damage = 1
 var speed = 3
 
@@ -14,4 +16,8 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	pass # Replace with function body.
+	if body is Enemy:
+		body.health = body.health - damage
+
+func _change_sprite(animation : String):
+	$AnimatedSprite2D.play(animation)

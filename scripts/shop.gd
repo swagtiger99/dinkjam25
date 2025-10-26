@@ -13,6 +13,9 @@ func _ready():
 	Error_Message.visible = false
 	randomize_searchbar_text()
 	set_sales()
+	
+	var music = get_music()
+	music.stream_paused = true
 
 
 
@@ -88,7 +91,6 @@ func set_sales():
 
 func _on_buy_medkit_pressed():
 	var player = get_player()
-	print(player)
 	if player is playerCharacter:
 		player.Medkits = player.Medkits + 1
 
@@ -105,4 +107,62 @@ func get_player():
 				return j
 				playerfound = true
 		if playerfound == false:
+			return "Error: Not found player"
+
+
+func _on_buy_revolver_pressed():
+	var player = get_player()
+	player._remove_debuffs()
+	player.ammo_max = 6
+	player.ammo = 6
+	player.shoot_screen_shake_amount = 1
+	player.base_damage = 1
+	player.bullet_speed = 3
+	player.reload_time = 2
+	player.GunSprite.play("Revolver")
+	_randomise_debuff()
+
+
+func _on_buy_sniper_pressed():
+	var player = get_player()
+	player._remove_debuffs()
+	player.ammo_max = 1
+	player.ammo = 1
+	player.shoot_screen_shake_amount = 20
+	player.reload_time = 4
+	player.base_damage = 5
+	player.bullet_speed = 10
+	_randomise_debuff()
+	player.GunSprite.play("Sniper")
+
+func _randomise_debuff():
+	var player = get_player()
+	var rand = randi_range(0, 1)
+	if rand == 0:
+		player.Screen_Shake_Debuff = true
+	elif rand == 1:
+		player.bullet_reverse_debuff = true
+	player._apply_debuffs()
+
+
+func _on_exit_button_pressed():
+	var player = get_player()
+	player.shopping = false
+	var music = get_music()
+	music.stream_paused = false
+	self.queue_free()
+
+func get_music():
+	var musicfound = false
+	var root_children = get_tree().root.get_children()
+	for i in root_children:
+		if i.name == "LevelMusic":
+			return i
+			musicfound = true
+		var root_children_children = i.get_children() 
+		for j in root_children_children:
+			if j.name == "LevelMusic":
+				return j
+				musicfound = true
+		if musicfound == false:
 			return "Error: Not found player"
