@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bac5id3c77j3x" path="res://assets/Pinky.png" id="6_1gqeq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55jtl"]
+size = Vector2(15.3333, 14.3333)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isvm2"]
 atlas = ExtResource("2_iwav8")
@@ -194,18 +195,27 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vja8"]
 
 [node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_1vja8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, -0.5)
 shape = SubResource("RectangleShape2D_55jtl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ly5gv")
-animation = &"1"
+animation = &"0"
 
 [node name="Damage_Area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage_Area"]
 shape = SubResource("RectangleShape2D_1vja8")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="Damage_Area" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_exited" from="Damage_Area" to="." method="_on_damage_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

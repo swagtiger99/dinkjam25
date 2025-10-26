@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://crem1asie65wj"]
+[gd_scene load_steps=6 format=3 uid="uid://crem1asie65wj"]
 
 [ext_resource type="PackedScene" uid="uid://ceio2dhexqfns" path="res://scenes/playerCharacter.tscn" id="1_uwrxv"]
 [ext_resource type="AudioStream" uid="uid://b0me110qadj8i" path="res://assets/dink25betterbattletheme.wav" id="2_yqjtg"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yqjtg"]
+vertices = PackedVector2Array(1938.79, 1234.06, -2118.53, 1259.93, -2263.45, -1390.46, 1881.2, -1577.54)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2274, -1400, 1891, -1588, 1949, 1244, -2128, 1270)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(314, 2661.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(20, 2.22)
 
 [node name="Game" type="Node2D"]
 
@@ -10,3 +21,32 @@
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_yqjtg")
 autoplay = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_yqjtg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1963, -69.25)
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-140, -1153)
+scale = Vector2(200, 200)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-132, 1029)
+scale = Vector2(200, 200)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1731, -100)
+shape = SubResource("RectangleShape2D_lnu2h")

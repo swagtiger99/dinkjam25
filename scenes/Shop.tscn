@@ -97,7 +97,8 @@ offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[color=black][font_size=10]Oh my! You must grab these top of the line medkits while they're on sale! They save lives all the time, every purchase is an injury avoided absolutely and definitely!"
+text = "[color=black][font_size=10]Oh my! You must grab these top of the line medkits while they're on sale! They save lives all the time, every purchase is an injury avoided absolutely and definitely!
+Press E to use Medkit"
 scroll_active = false
 
 [node name="Buy_Medkit" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
@@ -113,7 +114,7 @@ offset_right = -3.0
 offset_bottom = -31.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "BUY NOW!!!"
+text = "BUY NOW!!! (30)"
 
 [node name="Sale_Amount" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
 layout_mode = 0
@@ -122,7 +123,7 @@ offset_top = 174.0
 offset_right = 101.0
 offset_bottom = 200.0
 bbcode_enabled = true
-text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]91.02% off !!!"
+text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]95.04% off !!!"
 scroll_active = false
 
 [node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Medkit"]
@@ -201,7 +202,7 @@ offset_right = -3.0
 offset_bottom = -31.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "BUY NOW!!!"
+text = "BUY NOW!!! (1)"
 
 [node name="Sale_Amount" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Revolver"]
 layout_mode = 0
@@ -210,7 +211,7 @@ offset_top = 174.0
 offset_right = 103.0
 offset_bottom = 200.0
 bbcode_enabled = true
-text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]97.94% off !!!"
+text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]97.7% off !!!"
 scroll_active = false
 
 [node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Revolver"]
@@ -260,7 +261,7 @@ offset_right = -3.0
 offset_bottom = -31.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "BUY NOW!!!"
+text = "BUY NOW!!! (10)"
 
 [node name="Sale_Amount" type="RichTextLabel" parent="CanvasLayer/ScrollContainer/VBoxContainer/Sniper"]
 layout_mode = 0
@@ -269,7 +270,7 @@ offset_top = 174.0
 offset_right = 101.0
 offset_bottom = 200.0
 bbcode_enabled = true
-text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]95.03% off !!!"
+text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]91.15% off !!!"
 scroll_active = false
 
 [node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Sniper"]

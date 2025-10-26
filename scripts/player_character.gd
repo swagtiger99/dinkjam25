@@ -3,6 +3,8 @@ class_name playerCharacter extends CharacterBody2D
 
 const SPEED = 300.0
 
+var money = 30
+
 var Shop_Scene = preload("res://scenes/Shop.tscn")
 var max_HP = 7
 var HP = 7
@@ -29,6 +31,8 @@ var damage_screen_shake_amount : float = 10
 @onready var Camera = $Camera2D
 @onready var HPBar = $UI/CanvasLayer/HPBar
 @onready var Ammo_Counter = $UI/CanvasLayer/Ammo_Counter
+@onready var enemy = preload("res://scenes/Enemy.tscn")
+@onready var Money_Count = $UI/CanvasLayer/Money_count
 
 var shopping = false
 
@@ -82,6 +86,10 @@ func reload():
 	 
 
 func _physics_process(delta: float) -> void:
+	
+	Money_Count.text = "Money: "+str(money) + "
+	Medkits: "+str(Medkits)
+	
 	if reloading == false:
 		Ammo_Counter.text = str(ammo)
 	else:
@@ -115,8 +123,15 @@ func _physics_process(delta: float) -> void:
 		var new_shop = Shop_Scene.instantiate()
 		get_tree().get_root().add_child(new_shop)
 	
+	if Input.is_action_just_pressed("Heal") and Medkits > 0:
+		Medkits = Medkits - 1
+		HP = HP - 1
+	
 	if HP == 0:
-		get_tree().reload_current_scene()
+		for i in get_tree().root.get_children():
+			if i.name != "Game":
+				i.queue_free()
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 	if shopping == false:
 		move_and_slide()
 
@@ -142,3 +157,14 @@ func _remove_debuffs():
 	if bullet_reverse_debuff == true:
 		if bullet_speed < 0:
 			bullet_speed = bullet_speed * - 1
+
+
+func _on_enemy_timer_timeout():
+	var new_enemy = enemy.instantiate()
+	get_tree().get_root().add_child(new_enemy)
+	
+	var rand = randi_range(1, 6)
+	var children = Camera.get_children()
+	for i in children:
+		if i.name == str(rand):
+			new_enemy.global_position = i.global_position

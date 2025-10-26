@@ -18,6 +18,7 @@ func _process(delta):
 func _on_body_entered(body):
 	if body is Enemy:
 		body.health = body.health - damage
+		queue_free()
 
 func _change_sprite(animation : String):
 	$AnimatedSprite2D.play(animation)

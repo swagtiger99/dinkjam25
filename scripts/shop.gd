@@ -77,7 +77,6 @@ func _on_search_button_pressed():
 				Error_Message.visible = false
 
 func set_sales():
-	
 	var children = VBox.get_children()
 	for i in children:
 		var childrener = i.get_children()
@@ -92,7 +91,9 @@ func set_sales():
 func _on_buy_medkit_pressed():
 	var player = get_player()
 	if player is playerCharacter:
-		player.Medkits = player.Medkits + 1
+		if player.money >= 30:
+			player.Medkits = player.Medkits + 1
+			player.money = player.money - 30
 
 func get_player():
 	var playerfound = false
@@ -112,28 +113,32 @@ func get_player():
 
 func _on_buy_revolver_pressed():
 	var player = get_player()
-	player._remove_debuffs()
-	player.ammo_max = 6
-	player.ammo = 6
-	player.shoot_screen_shake_amount = 1
-	player.base_damage = 1
-	player.bullet_speed = 3
-	player.reload_time = 2
-	player.GunSprite.play("Revolver")
-	_randomise_debuff()
+	if player.money >= 1:
+		player._remove_debuffs()
+		player.ammo_max = 6
+		player.ammo = 6
+		player.shoot_screen_shake_amount = 1
+		player.base_damage = 1
+		player.bullet_speed = 3
+		player.reload_time = 2
+		player.GunSprite.play("Revolver")
+		_randomise_debuff()
+		player.money = player.money - 1
 
 
 func _on_buy_sniper_pressed():
 	var player = get_player()
-	player._remove_debuffs()
-	player.ammo_max = 1
-	player.ammo = 1
-	player.shoot_screen_shake_amount = 20
-	player.reload_time = 4
-	player.base_damage = 5
-	player.bullet_speed = 10
-	_randomise_debuff()
-	player.GunSprite.play("Sniper")
+	if player.money >= 10:
+		player._remove_debuffs()
+		player.ammo_max = 1
+		player.ammo = 1
+		player.shoot_screen_shake_amount = 20
+		player.reload_time = 4
+		player.base_damage = 5
+		player.bullet_speed = 10
+		_randomise_debuff()
+		player.GunSprite.play("Sniper")
+		player.money = player.money - 10
 
 func _randomise_debuff():
 	var player = get_player()
@@ -165,4 +170,4 @@ func get_music():
 				return j
 				musicfound = true
 		if musicfound == false:
-			return "Error: Not found player"
+			return "Error: Not found Music"
